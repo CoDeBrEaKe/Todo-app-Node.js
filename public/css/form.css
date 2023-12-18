@@ -1,0 +1,73 @@
+:root {
+    --main-color: #BF94E4;
+    --input-background: #eaeaea;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 60px auto;
+    flex-direction: column;
+}
+
+h1 {
+    text-align: center;
+}
+
+.form-input {
+    margin: 0.7rem 0;
+}
+
+.form-input input,
+.form-input label {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.25rem;
+    font-size: 21px;
+}
+
+.form-input input {
+    padding: 10px 15px;
+    border: 1px solid var(--main-color);
+    border-radius: 20px;
+}
+
+.signup button,
+.login button {
+    padding: 20px 50px;
+    font-size: 20px;
+    margin-top: 10px;
+    color: var(--input-background);
+    transition: all 0.3s;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--main-color);
+}
+
+.signup button:hover,
+.login button:hover {
+    background-color: #d1a2fa;
+}
+
+.user-message {
+    margin: auto;
+    width: auto;
+    border: 1px solid #4771fa;
+    padding: 1rem;
+    border-radius: 3px;
+    background: #b9c9ff;
+    text-align: center;
+}
+
+.user-message--error {
+    color: red;
+    border-color: red;
+    background: rgb(255, 176, 176);
+}
+
+input.invalid {
+    border-color: red;
+}

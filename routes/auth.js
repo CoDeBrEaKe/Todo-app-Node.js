@@ -1,0 +1,55 @@
+const express = require('express')
+
+const router = express.Router()
+const {check , body} = require('express-validator') 
+
+const User = require('../models/user')
+const authController = require("../controllers/auth")
+
+router.get('/signup' , authController.getSignup)
+
+router.post('/signup',
+[
+body("name")
+.isAlpha()
+.withMessage("Please Your Name shouldn't include numbers")
+,check("email")
+.isEmail()
+.withMessage("Please Enter Valid Email")
+.custom((value , {req})=>{
+    if (value === "test@test.com"){
+        throw new Error("This Email is Forbidden")
+    }
+    else{
+        return User.findOne({email:value}).then(user=>{
+            if (user){
+                throw new Error("This Email is already in use")
+            }
+        })
+    }
+})
+.normalizeEmail(),
+body('password' , "Please put a min 5 characters with only numbers and text")
+.isLength({min:5})
+.isAlphanumeric()
+.trim()
+]
+
+, authController.postSignup)
+
+router.get('/login' , authController.getLogin)
+
+router.post('/login' ,[
+    body("email")
+    .isEmail()
+    .withMessage("Please enter a valid email address.")
+    .normalizeEmail()
+    ,body('password' , "Please put a min 5 characters with only numbers and text")
+    .isLength({min:5})
+    .isAlphanumeric()
+    .trim()
+] ,authController.postLogin)
+
+router.post('/logout' , authController.logout)
+
+module.exports = router

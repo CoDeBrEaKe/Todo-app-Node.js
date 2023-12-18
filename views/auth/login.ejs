@@ -1,0 +1,40 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+    <%- include('../includes/navbar.ejs') %>
+    <div class="offset"></div>
+        <h1>WELCOME 👋</h1>
+        <% if (errorMessage) {%>
+            <div class="user-message user-message--error">
+              <%= errorMessage %>
+            </div>
+        <% }%>
+        <form action="/login" method="post" class="login">
+            <div class="form-input">
+                <label for="email">Email:</label>
+                <input 
+                class="<%= validationErrors.find(e => e.path === 'email') ? 'invalid' : ''%>"
+                type="email"  
+                name="email" 
+                id="email"
+                value="<%= oldInput.email %>"> 
+            </div>
+            <div class="form-input">
+                
+                <label for="password">Password :</label>
+                <input 
+                class="<%= validationErrors.find(e => e.path === 'password') ? 'invalid' : ''%>"
+                type="password" 
+                name="password" 
+                id="password"
+                value="<%= oldInput.password %>">
+            </div>
+            <input type="hidden" value="<%= csrfToken %>" name="_csrf" /> 
+            <button>
+                Login
+            </button>
+        </form>
+        <script src="js/navbar.js"></script>
+    </body>
+</html>

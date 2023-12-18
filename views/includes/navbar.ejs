@@ -1,0 +1,20 @@
+<header>
+    <h1 class="main-header">TODO</h1>
+    <div class="burger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <ul>
+        <% if(!isAuth)  {%>
+        <a href="/signup"><li>Sign Up</li></a>
+        <a href="/login"><li>Log in</li></a>
+        <% } else  { %>
+            <a href="/tasks"><li>Tasks</li></a>
+            <form action="/logout" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button>Logout</button>  
+            </form>
+        <% }  %>
+        </ul>
+</header>
