@@ -31,10 +31,6 @@ exports.postSignup = (req,res ,next)=>{
     const password = req.body.password
 
     const errors = validationResult(req)
-
-
-    console.log(errors.array());
-
     if (!errors.isEmpty()){
         res.status(422)
         return res.render("auth/signup" , {
@@ -56,7 +52,15 @@ exports.postSignup = (req,res ,next)=>{
         })
         return user.save()
     }).then(result=>{
-        return res.redirect("/login")
+        return res.render("auth/login" ,  {
+            message:"Account Created Successfully",
+            errorMessage:"",
+            oldInput:{
+                email:"",
+                password:""
+            },
+            validationErrors:[]
+        })
     })
 }
 exports.getLogin = (req, res, next)=>{
@@ -69,6 +73,7 @@ exports.getLogin = (req, res, next)=>{
         message = null
     }
     res.render('auth/login' , {
+        message:"",
         errorMessage:message,
         oldInput:{
             email:"",
@@ -120,6 +125,7 @@ exports.postLogin = (req, res, next)=>{
             return res.status(422).render("auth/login", {
                 path: "/login",
                 pageTitle: "Login",
+                message:"",
                 errorMessage: "Invalid email or password.",
                 oldInput: { email: email, password: password },
                 validationErrors: errors.array(),

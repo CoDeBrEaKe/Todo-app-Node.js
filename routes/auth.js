@@ -29,9 +29,9 @@ body("name")
     }
 })
 .normalizeEmail(),
-body('password' , "Please put a min 5 characters with only numbers and text")
-.isLength({min:5})
-.isAlphanumeric()
+body('password' , "Please put minimum 8 characters with at least 1 letter")
+.isLength({min:8})
+.matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/, "i")
 .trim()
 ]
 

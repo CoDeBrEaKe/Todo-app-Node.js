@@ -5,12 +5,17 @@
     <%- include('../includes/navbar.ejs') %>
     <div class="offset"></div>
         <h1>WELCOME 👋</h1>
-        <% if (errorMessage) {%>
-            <div class="user-message user-message--error">
-              <%= errorMessage %>
-            </div>
-        <% }%>
         <form action="/login" method="post" class="login">
+            <% if (message) {%>
+                <div class="user-message user-message--success">
+                  <%= message %>
+                </div>
+            <% }%>
+            <% if (errorMessage) {%>
+                <div class="user-message user-message--error">
+                  <%= errorMessage %>
+                </div>
+            <% }%>
             <div class="form-input">
                 <label for="email">Email:</label>
                 <input 
