@@ -272,7 +272,7 @@ aside ul a:hover {
     transition: all 0.3s;
     outline: 2px solid transparent;
     border: 2px solid transparent;
-    border-radius: 5px;
+    border-radius: 20px;
 }
 
 .tasks input:focus {
@@ -321,6 +321,24 @@ aside ul a:hover {
     width: 100%;
     margin-bottom: 0.25rem;
     font-size: 22px;
+}
+
+.add-task-form {
+    position: relative;
+}
+
+.sticky-button {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    cursor: pointer;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 20px;
+    border: none;
+    background-color: var(--main-color);
+    color: var(--input-background);
+    width: 70px;
 }
 
 .no-tasks {

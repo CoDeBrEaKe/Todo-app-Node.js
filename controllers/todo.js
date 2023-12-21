@@ -24,9 +24,8 @@ exports.getTasks =  async(req, res, next)=>
                 
                 if (categoryName){   
                     tasks = tasks.filter(task => task.categoryId? task.categoryId.name == categoryName : null)
-                    console.log("filtered!!!")
+             
                 }
-                console.log((page*tasksPerPage) , totalItems)
                 return res.render('todo/tasks' , {
                     path:categoryName,
                     tasks:tasks,
@@ -57,10 +56,15 @@ exports.createTask = (req , res, next)=>{
             categoryId:categoryId
         })
     }else{
-        task = new Task({
-             title:title,
-             userId:req.user._id,
-         })
+        if (title ==""){
+            res.redirect("/tasks")
+        }else{
+            
+            task = new Task({
+                title:title,
+                userId:req.user._id,
+            })
+        }
     }
     task.save().then(result=>{
         res.status(200)
