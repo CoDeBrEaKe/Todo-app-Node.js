@@ -57,7 +57,7 @@ exports.createTask = (req , res, next)=>{
         })
     }else{
         if (title ==""){
-            res.redirect("/tasks")
+            return res.redirect("/tasks")
         }else{
             
             task = new Task({
