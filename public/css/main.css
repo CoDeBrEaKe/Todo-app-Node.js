@@ -247,6 +247,7 @@ aside ul a:hover {
 }
 
 .category-toggle {
+    cursor: pointer;
     display: none;
     margin: 20px 0 -30px;
     color: var(--main-color);
@@ -292,7 +293,7 @@ aside ul a:hover {
     z-index: 10000;
     position: absolute;
     left: 50%;
-    top: 30%;
+    top: 50%;
     transform: translate(-50%, -50%);
 
 }
@@ -511,8 +512,10 @@ aside ul a:hover {
         font-size: 21px;
     }
 
+    .pop-up-form,
     .choose-category {
-        width: 80%;
+        width: 70%;
+        align-items: center;
         text-align: center;
     }
 

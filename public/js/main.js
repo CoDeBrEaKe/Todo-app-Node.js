@@ -26,6 +26,9 @@ addCategoryButton.addEventListener('click' , e=>{
     e.preventDefault()
     overlay.style.display = "block"
 
+    if (!document.querySelector('.pop-up-form'))
+    {
+
     let form = document.createElement('form')
     form.classList.add('pop-up-form')
     form.method = 'post'
@@ -77,7 +80,12 @@ addCategoryButton.addEventListener('click' , e=>{
     form.append(submit)
     
     document.body.append(form)
-
+}else{
+    document.querySelector('.pop-up-form').style.display = "flex"
+}
+if (document.querySelector('aside').classList.contains('active')){
+    document.querySelector('aside').classList.remove('active')
+}
 })
 
 overlay.addEventListener('click' , (e)=>{

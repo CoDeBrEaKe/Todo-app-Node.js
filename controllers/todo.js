@@ -16,7 +16,7 @@ exports.getTasks =  async(req, res, next)=>
     let categoryName = req.query.category || "";
     
     let totalItems ;
-    Task.find().countDocuments().then(tasksCount =>{
+    Task.find({userId:req.user._id}).countDocuments().then(tasksCount =>{
         totalItems = tasksCount
         Task.find({userId:req.user._id}).skip(tasksPerPage* (page-1)).limit(tasksPerPage).populate('categoryId').sort({"dateOfCreation":-1}).then(tasks=>{
         
@@ -24,14 +24,16 @@ exports.getTasks =  async(req, res, next)=>
                 
                 if (categoryName){   
                     tasks = tasks.filter(task => task.categoryId? task.categoryId.name == categoryName : null)
+                    console.log("filtered!!!")
                 }
+                console.log((page*tasksPerPage) , totalItems)
                 return res.render('todo/tasks' , {
                     path:categoryName,
                     tasks:tasks,
                     user:req.user,
                     categories:categories,
                     totalItems: totalItems,
-                    hasNextPage: page * tasksPerPage < totalItems,
+                    hasNextPage: (page * tasksPerPage) < totalItems,
                     hasPreviousPage: page > 1,
                     nextPage:page + 1,
                     previousPage : page -1,
